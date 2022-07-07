@@ -6,17 +6,18 @@ import (
 	"golang_lopei_grpc_server/repository"
 )
 
-type LopeiService interface{
-	CheckBalanceMessage(ctx context.Context, in *CheckBalanceMessage)(*ResultMessage, error)
+// type LopeiService interface{
+// 	CheckBalanceMessage(ctx context.Context, in *CheckBalanceMessage)(*ResultMessage, error)
 
-	DoPayment(ctx context.Context, in *PaymentMessage)(*ResultMessage, error)
-}
+// 	DoPayment(ctx context.Context, in *PaymentMessage)(*ResultMessage, error)
+// }
 
-type lopeiService struct {
+type LopeiService struct {
 	repo repository.LopeiRepository
+	UnimplementedLopeiPaymentServer
 }
 
-func (c *lopeiService) CheckBalanceMessage(ctx context.Context, in *CheckBalanceMessage) (*ResultMessage, error) {
+func (c *LopeiService) CheckBalanceMessage(ctx context.Context, in *CheckBalanceMessage) (*ResultMessage, error) {
 	lopeId := in.LopeiId
 	customer, err := c.repo.RetrieveById(lopeId)
 
@@ -35,7 +36,7 @@ func (c *lopeiService) CheckBalanceMessage(ctx context.Context, in *CheckBalance
 	return ResultMessage, nil 
 }
 
-func (l *lopeiService) DoPayment(ctx context.Context, in *PaymentMessage)(*ResultMessage, error){
+func (l *LopeiService) DoPayment(ctx context.Context, in *PaymentMessage)(*ResultMessage, error){
 	lopeId := in.LopeId
 	amount := in.Amount
 
@@ -63,8 +64,8 @@ func (l *lopeiService) DoPayment(ctx context.Context, in *PaymentMessage)(*Resul
 
 
 
-func NewLopeiService(repo repository.LopeiRepository) LopeiService {
-	service := new(lopeiService)
+func NewLopeiService(repo repository.LopeiRepository) *LopeiService {
+	service := new(LopeiService)
 	service.repo = repo 
 	return service 
 }

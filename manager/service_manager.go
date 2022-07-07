@@ -3,14 +3,14 @@ package manager
 import "golang_lopei_grpc_server/service"
 
 type ServiceManager interface {
-	LopeiService() service.LopeiService
+	LopeiService() *service.LopeiService
 }
 
 type serviceManager struct {
-	lopeiService service.LopeiService
+	lopeiService *service.LopeiService
 }
 
-func (s *serviceManager) LopeiService() service.LopeiService{
+func (s *serviceManager) LopeiService() *service.LopeiService{
 	return s.lopeiService
 }
 
