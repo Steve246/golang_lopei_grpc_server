@@ -11,7 +11,7 @@ type Config struct {
 }
 
 func (c *Config) readConfig() {
-	grpcUrl := os.Getenv("GRPC_URL")
+	grpcUrl := os.Getenv("GRPC_URL")//set GRPC_URL =localhost:8888
 	c.GrpcConfig = GrpcConfig{Url: grpcUrl}
 }
 
