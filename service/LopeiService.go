@@ -17,7 +17,7 @@ type LopeiService struct {
 	UnimplementedLopeiPaymentServer
 }
 
-func (c *LopeiService) CheckBalanceMessage(ctx context.Context, in *CheckBalanceMessage) (*ResultMessage, error) {
+func (c *LopeiService) CheckBalance(ctx context.Context, in *CheckBalanceMessage) (*ResultMessage, error) {
 	lopeId := in.LopeiId
 	customer, err := c.repo.RetrieveById(lopeId)
 
