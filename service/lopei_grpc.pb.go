@@ -36,7 +36,7 @@ func NewLopeiPaymentClient(cc grpc.ClientConnInterface) LopeiPaymentClient {
 
 func (c *lopeiPaymentClient) CheckBalance(ctx context.Context, in *CheckBalanceMessage, opts ...grpc.CallOption) (*ResultMessage, error) {
 	out := new(ResultMessage)
-	err := c.cc.Invoke(ctx, "/LopeiPayment/CheckBalance", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.LopeiPayment/CheckBalance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (c *lopeiPaymentClient) CheckBalance(ctx context.Context, in *CheckBalanceM
 
 func (c *lopeiPaymentClient) DoPayment(ctx context.Context, in *PaymentMessage, opts ...grpc.CallOption) (*ResultMessage, error) {
 	out := new(ResultMessage)
-	err := c.cc.Invoke(ctx, "/LopeiPayment/DoPayment", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.LopeiPayment/DoPayment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func _LopeiPayment_CheckBalance_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/LopeiPayment/CheckBalance",
+		FullMethod: "/api.LopeiPayment/CheckBalance",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LopeiPaymentServer).CheckBalance(ctx, req.(*CheckBalanceMessage))
@@ -112,7 +112,7 @@ func _LopeiPayment_DoPayment_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/LopeiPayment/DoPayment",
+		FullMethod: "/api.LopeiPayment/DoPayment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LopeiPaymentServer).DoPayment(ctx, req.(*PaymentMessage))
@@ -124,7 +124,7 @@ func _LopeiPayment_DoPayment_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LopeiPayment_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "LopeiPayment",
+	ServiceName: "api.LopeiPayment",
 	HandlerType: (*LopeiPaymentServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
